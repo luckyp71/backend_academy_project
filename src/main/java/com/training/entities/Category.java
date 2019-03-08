@@ -43,6 +43,15 @@ public class Category implements Serializable {
 	@OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnoreProperties({"category"})
 	private List<News> news;
+	
+	//Default constructor
+	public Category() {
+		//Leave it blank
+	}
+	
+	public Category(String name) {
+		this.name = name;
+	}
 
 	public long getCategoryId() {
 		return categoryId;

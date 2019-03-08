@@ -9,6 +9,10 @@ public class CategoryDTO {
 	private Timestamp categoryCreatedAt;
 
 	private Timestamp categoryUpdatedAt;
+	
+	public CategoryDTO(String categoryName) {
+		this.categoryName = categoryName;
+	}
 
 	public String getName() {
 		return categoryName;
