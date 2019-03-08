@@ -8,11 +8,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class CategoryServiceTest {
 
-//	private Category
-//	
-//	@Before
-//	public void ini() {
-//		
-//	}
+	private Category
+	
+	@Before
+	public void ini() {
+		
+	}
 	
 }
