@@ -14,23 +14,23 @@ import com.training.models.ResponseData;
 import com.training.services_impl.NewsUserServiceImpl;
 
 @RestController
-@RequestMapping("/news")
+@RequestMapping("/users")
 public class NewsUserController {
 
 	@Autowired
 	NewsUserServiceImpl userService;
 
-	@GetMapping(value = "/users/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<ResponseData> getUserById(@PathVariable("id") long id) {
 		return userService.getUserProfile(id);
 	}
 
-	@GetMapping(value = "/users/username/{username}")
+	@GetMapping(value = "/{username}")
 	public ResponseEntity<ResponseData> getUserByUsername(@PathVariable("username") String username) {
 		return userService.getUserByUsername(username);
 	}
 
-	@PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseData> registerUser(@RequestBody NewsUserDTO userDTO) {
 		return userService.register(userDTO);
 	}
@@ -39,6 +39,4 @@ public class NewsUserController {
 	public ResponseEntity<ResponseData> login(@RequestBody NewsUserDTO userDTO) {
 		return userService.login(userDTO);
 	}
-	
-
 }

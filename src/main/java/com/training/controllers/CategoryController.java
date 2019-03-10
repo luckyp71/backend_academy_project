@@ -19,7 +19,7 @@ public class CategoryController {
 	@Autowired
 	CategoryServiceImpl categoryService;
 	
-	@PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseData> registerUser(@RequestBody CategoryDTO categoryDTO) {
 		return categoryService.addCategory(categoryDTO);
 	}
