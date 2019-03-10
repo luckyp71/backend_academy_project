@@ -1,14 +1,10 @@
 package com.training.models;
 
-import java.sql.Timestamp;
-
 public class NewsDTO {
 
 	private String newsTitle;
 	private String newsContent;
 	private String newsAuthor;
-	private Timestamp newsCreatedAt;
-	private Timestamp newsUpdatedAt;
 	private boolean newsIsActive;
 	private String newsCategory;
 
@@ -34,22 +30,6 @@ public class NewsDTO {
 
 	public void setAuthor(String newsAuthor) {
 		this.newsAuthor = newsAuthor;
-	}
-
-	public Timestamp getCreatedAt() {
-		return newsCreatedAt;
-	}
-
-	public void setCreatedAt(Timestamp newsCreatedAt) {
-		this.newsCreatedAt = newsCreatedAt;
-	}
-
-	public Timestamp getUpdatedAt() {
-		return newsUpdatedAt;
-	}
-
-	public void setUpdatedAt(Timestamp newsUpdatedAt) {
-		this.newsUpdatedAt = newsUpdatedAt;
 	}
 
 	public boolean isActive() {

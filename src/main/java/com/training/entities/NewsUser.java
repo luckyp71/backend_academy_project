@@ -32,7 +32,7 @@ public class NewsUser implements Serializable {
 	@Column(name = "user_id")
 	private long id;
 
-	@Column(name = "username", unique = true, columnDefinition="VARCHAR(100) NOT NULL")
+	@Column(name = "username", columnDefinition="VARCHAR(100) NOT NULL")
 	private String username;
 
 	@Column(name = "password", columnDefinition="VARCHAR(100) NOT NULL")

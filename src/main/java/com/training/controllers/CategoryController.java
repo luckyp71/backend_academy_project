@@ -22,16 +22,22 @@ public class CategoryController {
 
 	@Autowired
 	CategoryServiceImpl categoryService;
+
+	@GetMapping(value = "")
+	public ResponseEntity<ResponseData> getCategories() {
+		return categoryService.getCategories();
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ResponseData> getCategoryById(@PathVariable("id")long id) {
+		return categoryService.getCategoryById(id);
+	}	
 	
 	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseData> addCategory(@RequestBody CategoryDTO categoryDTO) {
 		return categoryService.addCategory(categoryDTO);
 	}
-	
-	@GetMapping(value = "")
-	public ResponseEntity<ResponseData> getCategories() {
-		return categoryService.getCategories();
-	}
+
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ResponseData> updateCategory(@PathVariable("id")long id, @RequestBody CategoryDTO categoryDTO) {
