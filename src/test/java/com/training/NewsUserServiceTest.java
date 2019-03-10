@@ -42,9 +42,9 @@ public class NewsUserServiceTest {
 
 		NewsUserDTO user = new NewsUserDTO();
 		/*
-		 * Generate random username to ensure there is no username below in news_user table.
+		 * Generate random username to ensure there is no username below in the news_user table.
 		 * But still there is always potency that the generated random username may already exists 
-		 * in news_user table.
+		 * in the news_user table.
 		 */
 		char[] chars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 				'o','p','q','r','s','t','u','v','w','x','y','z'}; 

@@ -14,21 +14,27 @@ import javax.persistence.Column;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 
 @Entity
 @Table(name = "news_user")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@SequenceGenerator(name="userSequence", 
+			allocationSize=1, 
+			initialValue =1, 
+			sequenceName="userSequence1")
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator="userSequence")
 	@Column(name = "user_id")
 	private long id;
 
@@ -50,7 +56,6 @@ public class NewsUser implements Serializable {
 	private char isActive;
 
 	@OneToMany(mappedBy = "newsUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
 	private List<News> news;
 
 	//Default constructor

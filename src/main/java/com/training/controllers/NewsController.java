@@ -1,4 +1,4 @@
-package com.training.controllers;
+	package com.training.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -43,7 +43,7 @@ public class NewsController {
 		return newsService.updateNews(id, newsDTO);
 	}
 	
-	@DeleteMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ResponseData> deleteNews(@PathVariable("id")long id) {		
 		return newsService.deleteNews(id);
 	}

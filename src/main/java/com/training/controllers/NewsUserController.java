@@ -21,7 +21,7 @@ public class NewsUserController {
 	NewsUserServiceImpl userService;
 
 	@GetMapping(value = "")
-	public ResponseEntity<ResponseData> getUserById(@RequestParam(defaultValue="",required=false) String id,
+	public ResponseEntity<ResponseData> getUser(@RequestParam(defaultValue="",required=false) String id,
 			@RequestParam(defaultValue="",required=false) String username) {
 		if (!username.isEmpty()) {
 			return userService.getUserByUsername(username);			

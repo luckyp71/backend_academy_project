@@ -36,9 +36,9 @@ public class CategoryServiceTest {
 		
 		CategoryDTO category = new CategoryDTO();
 		/*
-		 * Generate random category_name to ensure there is no category_name below in category table.
+		 * Generate random category_name to ensure there is no category_name below in the category table.
 		 * But still there is always potency that the generated random category_name may already exists 
-		 * in category table.
+		 * in the category table.
 		 */
 		char[] chars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n',
 				'o','p','q','r','s','t','u','v','w','x','y','z'}; 
