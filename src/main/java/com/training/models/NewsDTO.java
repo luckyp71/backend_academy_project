@@ -1,50 +1,47 @@
 package com.training.models;
 
+import com.training.entities.Category;
+import com.training.entities.NewsUser;
+
 public class NewsDTO {
 
-	private String newsTitle;
-	private String newsContent;
-	private String newsAuthor;
-	private boolean newsIsActive;
-	private String newsCategory;
+	private String title;
+
+	private String content;
+	
+	private Category category;
+	
+	private NewsUser user;
 
 	public String getTitle() {
-		return newsTitle;
+		return title;
 	}
 
-	public void setTitle(String newsTitle) {
-		this.newsTitle = newsTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getContent() {
-		return newsContent;
+		return content;
 	}
 
-	public void setContent(String newsContent) {
-		this.newsContent = newsContent;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public String getAuthor() {
-		return newsAuthor;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setAuthor(String newsAuthor) {
-		this.newsAuthor = newsAuthor;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
-	public boolean isActive() {
-		return newsIsActive;
+	public NewsUser getUser() {
+		return user;
 	}
 
-	public void setActive(boolean newsIsActive) {
-		this.newsIsActive = newsIsActive;
-	}
-
-	public String getCategory() {
-		return newsCategory;
-	}
-
-	public void setCategory(String newsCategory) {
-		this.newsCategory = newsCategory;
+	public void setUser(NewsUser user) {
+		this.user = user;
 	}
 }

@@ -117,11 +117,19 @@ public class News  implements Serializable{
 		this.newsUser = newsUser;
 	}
 
-	public Category getCattegory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCattegory(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public char getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(char isActive) {
+		this.isActive = isActive;
 	}
 }

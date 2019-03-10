@@ -13,14 +13,14 @@ import com.training.exceptions.NewsExceptionHandler;
 import com.training.exceptions.NotFoundException;
 import com.training.models.NewsUserDTO;
 import com.training.models.ResponseData;
-import com.training.repositories.NewsUserServiceRepo;
+import com.training.repositories.NewsUserRepo;
 import com.training.services.NewsUserService;
 
 @Service
 public class NewsUserServiceImpl implements NewsUserService {
 
 	@Autowired
-	NewsUserServiceRepo userRepo;
+	NewsUserRepo userRepo;
 
 	@Autowired
 	ResponseDataServiceImpl responseService;
