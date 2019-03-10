@@ -37,8 +37,8 @@ public class NewsUserServiceTest {
 		int actualResult = 0;
 
 		NewsUserDTO user = new NewsUserDTO();
-		// Assumed there is no username called user1 in news_user table
-		user.setUsername("user7");
+		// Assumed there is no username called user8 in news_user table
+		user.setUsername("user8");
 		user.setPassword("userpassword");
 		actualResult = userService.register(user).getBody().getMeta().getCode();
 

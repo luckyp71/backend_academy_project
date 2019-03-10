@@ -32,7 +32,8 @@ public class CategoryServiceTest {
 		String expectedResult = "ok";
 		
 		CategoryDTO category = new CategoryDTO();
-		category.setName("Programming");
+		//Assume there is no category name below in category table
+		category.setName("Java Programming");
 		
 		String actualResult = categoryService.addCategory(category).getBody().getStatus();
 		assertEquals(expectedResult, actualResult);
