@@ -9,7 +9,7 @@ public interface CategoryService {
 	
 	public ResponseEntity<ResponseData> getCategories();
 	
-	public ResponseEntity<ResponseData> getCategoryId(long id);
+	public ResponseEntity<ResponseData> getCategoryById(long id);
 	
 	public ResponseEntity<ResponseData> addCategory(CategoryDTO category);
 	

@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public ResponseEntity<ResponseData> getCategoryId(long id) {
+	public ResponseEntity<ResponseData> getCategoryById(long id) {
 		try {
 			Category existingCategory = categoryRepo.findById(id).orElse(null);
 			if (existingCategory == null) {
@@ -66,8 +66,8 @@ public class CategoryServiceImpl implements CategoryService {
 			if (existingCategory == null) {
 				throw new NotFoundException();
 			}
-			Category category = new Category();
-			category.setName(categoryDTO.getName());
+			existingCategory.setName(categoryDTO.getName());
+			categoryRepo.save(existingCategory);
 			return responseService.responseSuccess(categoryDTO);
 		} catch (NotFoundException ne) {
 			return newsException.notFoundException();
@@ -81,8 +81,10 @@ public class CategoryServiceImpl implements CategoryService {
 			if (existingCategory == null) {
 				throw new NotFoundException();
 			}
+			existingCategory.setIsActive('N');
+			categoryRepo.save(existingCategory);
 			CategoryDTO categoryDTO = new CategoryDTO();
-			categoryRepo.delete(existingCategory);
+			categoryDTO.setName(existingCategory.getName());
 			return responseService.responseSuccess(categoryDTO);
 		} catch (NotFoundException ne) {
 			return newsException.notFoundException();
