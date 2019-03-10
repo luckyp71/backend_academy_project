@@ -46,6 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
 			if (existingCategory == null || existingCategory.getIsActive()=='N') {
 				throw new NotFoundException();
 			}
+			
 			CategoryDTO categoryDTO = new CategoryDTO();
 			categoryDTO.setName(existingCategory.getName());
 			return responseService.responseSuccess(categoryDTO);
@@ -61,6 +62,7 @@ public class CategoryServiceImpl implements CategoryService {
 			if (existingCategory != null && existingCategory.getIsActive()=='Y') {
 				throw new DuplicateException();
 			}
+			
 			Category category = new Category();
 			category.setName(categoryDTO.getName());
 			categoryRepo.save(category);
@@ -89,14 +91,13 @@ public class CategoryServiceImpl implements CategoryService {
 	public ResponseEntity<ResponseData> deleteCategory(long id) {
 		try {
 			Category existingCategory = categoryRepo.findById(id).orElse(null);
-			if (existingCategory == null || existingCategory.getIsActive()=='N') {
+			if (existingCategory == null || existingCategory.getIsActive()=='N') 
 				throw new NotFoundException();
-			}
+			
 			existingCategory.setIsActive('N');
 			categoryRepo.save(existingCategory);
-			CategoryDTO categoryDTO = new CategoryDTO();
-			categoryDTO.setName(existingCategory.getName());
-			return responseService.responseSuccess(categoryDTO);
+
+			return responseService.responseSuccess(null);
 		} catch (NotFoundException ne) {
 			return newsException.notFoundException();
 		}
