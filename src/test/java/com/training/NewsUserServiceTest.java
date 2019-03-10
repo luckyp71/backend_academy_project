@@ -1,11 +1,12 @@
 package com.training;
 
-import static org.junit.Assert.assertEquals;
 
+import org.junit.runner.RunWith;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import static org.junit.Assert.assertEquals;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -13,6 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.training.entities.NewsUser;
 import com.training.models.NewsUserDTO;
 import com.training.services_impl.NewsUserServiceImpl;
+
+import java.security.SecureRandom;
+import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,8 +41,22 @@ public class NewsUserServiceTest {
 		int actualResult = 0;
 
 		NewsUserDTO user = new NewsUserDTO();
-		// Assumed there is no username called user8 in news_user table
-		user.setUsername("user8");
+		/*
+		 * Generate random username to ensure there is no username below in news_user table.
+		 * But still there is always potency that the generated random username may already exists 
+		 * in news_user table.
+		 */
+		char[] chars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n',
+				'o','p','q','r','s','t','u','v','w','x','y','z'}; 
+		SecureRandom rand = new SecureRandom();
+		char[] username = new char[chars.length];
+		
+		IntStream.range(0, chars.length).forEach(i -> {
+			int randChar = rand.nextInt(chars.length);	
+			username[i]=chars[randChar];
+		});
+		
+		user.setUsername(String.valueOf(username));
 		user.setPassword("userpassword");
 		actualResult = userService.register(user).getBody().getMeta().getCode();
 
