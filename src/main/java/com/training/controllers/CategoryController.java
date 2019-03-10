@@ -3,6 +3,7 @@ package com.training.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class CategoryController {
 	CategoryServiceImpl categoryService;
 	
 	@PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseData> registerUser(@RequestBody CategoryDTO categoryDTO) {
+	public ResponseEntity<ResponseData> addCategory(@RequestBody CategoryDTO categoryDTO) {
 		return categoryService.addCategory(categoryDTO);
 	}
 	
@@ -37,9 +38,9 @@ public class CategoryController {
 		return categoryService.updateCategory(id, categoryDTO);
 	}
 	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<ResponseData> getCategory(@PathVariable("id")long id) {
-		return categoryService.getCategoryById(id);
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<ResponseData> deleteCategoryById(@PathVariable("id")long id) {
+		return categoryService.deleteCategory(id);
 	}
 	
 }
