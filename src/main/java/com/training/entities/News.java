@@ -21,78 +21,71 @@ import java.sql.Timestamp;
 import java.io.Serializable;
 
 @Entity
-@Table(name="news")
-public class News  implements Serializable{
-	
+@Table(name = "news")
+public class News implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name="news_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "news_id")
 	private long id;
-	
-	@Column(name="title", columnDefinition="VARCHAR(100) NOT NULL")
+
+	@Column(name = "title", columnDefinition = "VARCHAR(100) NOT NULL")
 	private String title;
-	
-	@Column(name="content")
+
+	@Column(name = "content")
 	private String content;
-	
-	@Column(name="author", columnDefinition="VARCHAR(100) NOT NULL")
-	private String author;
-	
+
 	@CreationTimestamp
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	private Timestamp newsCreatedAt;
 
 	@UpdateTimestamp
-	@Column(name="updated_at",columnDefinition= "timestamp NULL default NULL on update current_timestamp")
+	@Column(name = "updated_at", columnDefinition = "timestamp NULL default NULL on update current_timestamp")
 	private Timestamp newsUpdatedAt;
-	
-	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")
+
+	@Column(name = "is_active", columnDefinition = "CHAR(1) NOT NULL DEFAULT('Y')")
 	private char isActive;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="user_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id")
 	@JsonIgnoreProperties("newsUser")
 	public NewsUser newsUser;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="category_id")
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "category_id")
 	@JsonIgnoreProperties("category")
 	private Category category;
-	
+
+	public News() {
+		this.isActive = 'Y';
+	}
+
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getContent() {
 		return content;
 	}
-	
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	public String getAuthor() {
-		return author;
-	}
-	
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	
+
 	public Timestamp getNewsCreatedAt() {
 		return newsCreatedAt;
 	}
@@ -108,11 +101,11 @@ public class News  implements Serializable{
 	public void setNewsUpdatedAt(Timestamp newsUpdatedAt) {
 		this.newsUpdatedAt = newsUpdatedAt;
 	}
-	
+
 	public NewsUser getNewsUser() {
 		return newsUser;
 	}
-	
+
 	public void setNewsUser(NewsUser newsUser) {
 		this.newsUser = newsUser;
 	}

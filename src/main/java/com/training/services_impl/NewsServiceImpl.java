@@ -12,6 +12,7 @@ import com.training.entities.News;
 import com.training.entities.NewsUser;
 import com.training.exceptions.DuplicateException;
 import com.training.exceptions.NewsExceptionHandler;
+import com.training.exceptions.NotFoundException;
 import com.training.models.NewsDTO;
 import com.training.models.ResponseData;
 import com.training.repositories.CategoryRepo;
@@ -35,17 +36,20 @@ public class NewsServiceImpl implements NewsService{
 	ResponseDataServiceImpl responseService;
 	
 	@Autowired
+	ResponseDataServiceImpl categoryService;
+	
+	@Autowired
 	NewsExceptionHandler newsException;
 	
 	@Override
 	public ResponseEntity<ResponseData> getNews() {
 		List<NewsDTO> news = new ArrayList<>();
-		newsRepo.findAll().stream().forEach(n-> {
+		newsRepo.findAll().stream().forEach(n-> {	
 			NewsDTO newsDTO = new NewsDTO();
 			newsDTO.setTitle(n.getTitle());
-			newsDTO.setTitle(n.getAuthor());
 			newsDTO.setContent(n.getContent());
-			newsDTO.setCategory(n.getCategory());
+			newsDTO.setCategoryId(n.getCategory().getCategoryId());
+			newsDTO.setUserId(n.getNewsUser().getId());;
 			news.add(newsDTO);			
 		});	
 		return responseService.responseSuccess(news);
@@ -58,24 +62,32 @@ public class NewsServiceImpl implements NewsService{
 	}
 
 	@Override
-	public ResponseEntity<ResponseData> insertNews(NewsDTO newsDTO) {
+	public ResponseEntity<ResponseData> addNews(NewsDTO newsDTO) {
 		try {
 		//Title must unique?
 		News existingNews = newsRepo.findNewsByTitle(newsDTO.getTitle()).orElse(null);
 		if(existingNews != null && existingNews.getIsActive()=='Y') 
 			throw new DuplicateException();
-		Category category = categoryRepo.findById(newsDTO.getCategory().getCategoryId()).orElse(null);
-		NewsUser user = userRepo.findById(newsDTO.getUser().getId()).orElse(null);
+
+		Category existingCategory = categoryRepo.findById(newsDTO.getCategoryId()).orElse(null);
+		if(existingCategory == null || existingCategory.getIsActive()=='N') 
+			throw new NotFoundException();
 		
-		existingNews.setNewsUser(newsDTO.getUser());
-		existingNews.setTitle(newsDTO.getTitle());
-		existingNews.setContent(newsDTO.getContent());
-		existingNews.setCategory(category);
-		existingNews.setNewsUser(user);
-		newsRepo.save(existingNews);
-		return responseService.responseSuccess(existingNews);
+		NewsUser existingUser = userRepo.findById(newsDTO.getUserId()).orElse(null);
+		if(existingUser == null || existingUser.getIsActive()=='N') 
+			throw new NotFoundException();
+		
+		News news = new News();
+		news.setNewsUser(existingUser);
+		news.setTitle(newsDTO.getTitle());
+		news.setContent(newsDTO.getContent());
+		news.setCategory(existingCategory);
+		newsRepo.save(news);
+		return responseService.responseSuccess(newsDTO);
 		} catch(DuplicateException de) {
 			return newsException.duplicateException();
+		} catch(NotFoundException ne) {
+			return newsException.notFoundException();
 		}
 	}
 

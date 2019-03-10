@@ -1,7 +1,7 @@
 package com.training.models;
 
 public class CategoryDTO {
-	
+
 	private String categoryName;
 
 	//Default constructor
@@ -20,4 +20,5 @@ public class CategoryDTO {
 	public void setName(String categoryName) {
 		this.categoryName = categoryName;
 	}
+
 }

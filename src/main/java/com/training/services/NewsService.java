@@ -11,7 +11,7 @@ public interface NewsService {
 	
 	public ResponseEntity<ResponseData> getNewsById(long id);
 	
-	public ResponseEntity<ResponseData> insertNews(NewsDTO newsDTO);
+	public ResponseEntity<ResponseData> addNews(NewsDTO newsDTO);
 	
 	public ResponseEntity<ResponseData> updateNews(long id, NewsDTO newsDTO);
 	

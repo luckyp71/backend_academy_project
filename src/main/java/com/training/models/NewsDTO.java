@@ -1,17 +1,18 @@
 package com.training.models;
 
-import com.training.entities.Category;
-import com.training.entities.NewsUser;
+import java.io.Serializable;
 
-public class NewsDTO {
+public class NewsDTO implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private String title;
 
 	private String content;
 	
-	private Category category;
+	private long categoryId;
 	
-	private NewsUser user;
+	private long userId;
 
 	public String getTitle() {
 		return title;
@@ -29,19 +30,19 @@ public class NewsDTO {
 		this.content = content;
 	}
 
-	public Category getCategory() {
-		return category;
+	public long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setCategoryId(long categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public NewsUser getUser() {
-		return user;
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setUser(NewsUser user) {
-		this.user = user;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 }
