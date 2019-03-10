@@ -1,18 +1,20 @@
 package com.training.services;
 
-import java.util.List;
+import org.springframework.http.ResponseEntity;
 
-import com.training.entities.Category;
 import com.training.models.CategoryDTO;
+import com.training.models.ResponseData;
 
 public interface CategoryService {
 	
-	public List<Category> getCategories();
+	public ResponseEntity<ResponseData> getCategories();
 	
-	public boolean addCategory(Category category);
+	public ResponseEntity<ResponseData> getCategoryId(long id);
 	
-	public boolean updateCategory(long id, Category category);
+	public ResponseEntity<ResponseData> addCategory(CategoryDTO category);
 	
-	public boolean deleteCategory(long id);
+	public ResponseEntity<ResponseData> updateCategory(long id, CategoryDTO category);
+	
+	public ResponseEntity<ResponseData> deleteCategory(long id);
 
 }

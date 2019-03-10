@@ -1,16 +1,19 @@
 package com.training.services;
 
-import com.training.entities.NewsUser;
+import org.springframework.http.ResponseEntity;
+
+import com.training.models.NewsUserDTO;
+import com.training.models.ResponseData;
 
 public interface NewsUserService {
 
-	public boolean register(NewsUser user);
+	public ResponseEntity<ResponseData> register(NewsUserDTO user);
 	
-	public boolean login(NewsUser user);
+	public ResponseEntity<ResponseData> login(NewsUserDTO user);
 	
-	public boolean logout();
+	public ResponseEntity<ResponseData> logout();
 	
-	public NewsUser getUserProfile(long id);
+	public ResponseEntity<ResponseData> getUserProfile(long id);
 	
-	public NewsUser getUserByUsername(String username);
+	public ResponseEntity<ResponseData> getUserByUsername(String username);
 }

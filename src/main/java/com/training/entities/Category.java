@@ -29,7 +29,7 @@ public class Category implements Serializable {
 	@Column(name="category_id")
 	private long categoryId;
 	
-	@Column(name="name")
+	@Column(name="name", columnDefinition="VARCHAR(80) NOT NULL")
 	private String name;
 	
 	@CreationTimestamp
@@ -44,9 +44,12 @@ public class Category implements Serializable {
 	@JsonIgnoreProperties({"category"})
 	private List<News> news;
 	
+	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")
+	private char isActive;
+	
 	//Default constructor
 	public Category() {
-		//Leave it blank
+		this.isActive = 'Y';
 	}
 	
 	public Category(String name) {
@@ -91,5 +94,13 @@ public class Category implements Serializable {
 
 	public void setNews(List<News> news) {
 		this.news = news;
+	}
+
+	public char getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(char isActive) {
+		this.isActive = isActive;
 	}
 }

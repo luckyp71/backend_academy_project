@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.training.entities.NewsUser;
+import com.training.models.NewsUserDTO;
 import com.training.services_impl.NewsUserServiceImpl;
 
 @RunWith(SpringRunner.class)
@@ -24,6 +25,7 @@ public class NewsUserServiceTest {
 	
 	@Before
 	public void init() {
+		//Assumed we have added below credential data in news_user table
 		user.setId(1);
 		user.setUsername("lucky");
 		user.setPassword("pratama");
@@ -31,38 +33,44 @@ public class NewsUserServiceTest {
 	
 	@Test
 	public void registerTest() {
-		boolean expectedResult = true;
-		boolean actualResult = false;
+		int expectedResult = 200;
+		int actualResult = 0;
 		
-		NewsUser user = new NewsUser();
-		user.setUsername("lucky");
-		user.setPassword("pratama");
-		actualResult = userService.register(user);
+		NewsUserDTO user = new NewsUserDTO();
+		//Assumed there is no username called user1
+		user.setUsername("user4");
+		user.setPassword("userpassword");
+		actualResult = userService.register(user).getBody().getMeta().getCode();
 		
 		assertEquals(expectedResult, actualResult);
 	}
 		
 	@Test
 	public void loginTest() {
-		boolean expectedResult = true;
-		//Still harcoded for positive testing scenario purposes
-		boolean actualResult = true;
+		int expectedResult = 200;
+		int actualResult = 0;
 		
+		NewsUserDTO user = new NewsUserDTO();
+
+		user.setUsername(this.user.getUsername());
+		user.setPassword(this.user.getPassword());
+		actualResult = userService.login(user).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 	
 	@Test
 	public void logoutTest() {
-		boolean expectedResult = true;
-		//Still harcoded for positive testing scenario purposes
-		boolean actualResult = true;
+		int expectedResult = 200;
+		//Still harcoded for positive testing scenario purpose
+		int actualResult = 200;
 		
-		assertEquals(expectedResult, actualResult);	}
+		assertEquals(expectedResult, actualResult);	
+	}
 	
 	@Test
 	public void getUserProfileTest() {
-		String expectedResult = user.getUsername();
-		String actualResult = userService.getUserProfile(1).getUsername();
+		int expectedResult = 200;
+		int actualResult = userService.getUserProfile(1).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 	
@@ -70,5 +78,4 @@ public class NewsUserServiceTest {
 	public void destroy() {
 		user = new NewsUser();
 	}
-	
 }

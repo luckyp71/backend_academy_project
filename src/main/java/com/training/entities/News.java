@@ -31,13 +31,13 @@ public class News  implements Serializable{
 	@Column(name="news_id")
 	private long id;
 	
-	@Column(name="title")
+	@Column(name="title", columnDefinition="VARCHAR(100) NOT NULL")
 	private String title;
 	
 	@Column(name="content")
 	private String content;
 	
-	@Column(name="author")
+	@Column(name="author", columnDefinition="VARCHAR(100) NOT NULL")
 	private String author;
 	
 	@CreationTimestamp
@@ -48,8 +48,8 @@ public class News  implements Serializable{
 	@Column(name="updated_at",columnDefinition= "timestamp NULL default NULL on update current_timestamp")
 	private Timestamp newsUpdatedAt;
 	
-	@Column(name="is_active")
-	private boolean isActive;
+	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")
+	private char isActive;
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
@@ -107,14 +107,6 @@ public class News  implements Serializable{
 
 	public void setNewsUpdatedAt(Timestamp newsUpdatedAt) {
 		this.newsUpdatedAt = newsUpdatedAt;
-	}
-
-	public boolean isActive() {
-		return isActive;
-	}
-	
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
 	}
 	
 	public NewsUser getNewsUser() {

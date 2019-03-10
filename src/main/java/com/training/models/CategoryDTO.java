@@ -10,6 +10,11 @@ public class CategoryDTO {
 
 	private Timestamp categoryUpdatedAt;
 	
+	//Default constructor
+	public CategoryDTO() {
+		//Leave it blank
+	}
+	
 	public CategoryDTO(String categoryName) {
 		this.categoryName = categoryName;
 	}

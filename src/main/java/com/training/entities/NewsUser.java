@@ -17,7 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 
@@ -32,10 +32,10 @@ public class NewsUser implements Serializable {
 	@Column(name = "user_id")
 	private long id;
 
-	@Column(name = "username", unique = true)
+	@Column(name = "username", unique = true, columnDefinition="VARCHAR(100) NOT NULL")
 	private String username;
 
-	@Column(name = "password")
+	@Column(name = "password", columnDefinition="VARCHAR(100) NOT NULL")
 	private String password;
 
 	@CreationTimestamp
@@ -45,11 +45,19 @@ public class NewsUser implements Serializable {
 	@UpdateTimestamp
 	@Column(name = "updated_at", columnDefinition = "timestamp NULL default NULL on update current_timestamp")
 	private Timestamp updatedAt;
+	
+	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")
+	private char isActive;
 
 	@OneToMany(mappedBy = "newsUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({ "newsUser" })
+	@JsonIgnore
 	private List<News> news;
 
+	//Default constructor
+	public NewsUser() {
+		this.isActive = 'Y';
+	}
+	
 	public long getId() {
 		return id;
 	}
@@ -98,4 +106,11 @@ public class NewsUser implements Serializable {
 		this.news = news;
 	}
 
+	public char getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(char isActive) {
+		this.isActive = isActive;
+	}
 }
