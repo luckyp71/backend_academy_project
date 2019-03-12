@@ -11,20 +11,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.training.models.NewsDTO;
-import com.training.services_impl.NewsServiceImpl;
+import com.training.controllers.NewsController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NewsServiceTest {
+public class NewsControllerTest {
 	
 	@Autowired
-	NewsServiceImpl newsService;
+	NewsController newsController;
 	
 	@Test
 	public void getNewsTest() {
 		int expectedResult = 0;
 		@SuppressWarnings("unchecked")
-		List<NewsDTO> news = (List<NewsDTO>) newsService.getNews().getBody().getData();
+		List<NewsDTO> news = (List<NewsDTO>) newsController.getNews().getBody().getData();
 		int actualResult = news.size();
 		
 		//Assumed we have add some data into news table 

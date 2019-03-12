@@ -1,20 +1,18 @@
 package com.training.services;
 
 import com.training.models.NewsDTO;
-import com.training.models.ResponseData;
-
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 
 public interface NewsService {
 
-	public ResponseEntity<ResponseData> getNews();
+	public List<NewsDTO> getNews();
 	
-	public ResponseEntity<ResponseData> getNewsById(long id);
+	public NewsDTO getNewsById(long id);
 	
-	public ResponseEntity<ResponseData> addNews(NewsDTO newsDTO);
+	public char addNews(NewsDTO newsDTO);
 	
-	public ResponseEntity<ResponseData> updateNews(long id, NewsDTO newsDTO);
+	public boolean updateNews(long id, NewsDTO newsDTO);
 	
-	public ResponseEntity<ResponseData> deleteNews(long id);
+	public boolean deleteNews(long id);
 
 }

@@ -10,23 +10,23 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.training.models.CategoryDTO;
-import com.training.services_impl.CategoryServiceImpl;
 
+import com.training.controllers.CategoryController;
+import com.training.models.CategoryDTO;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CategoryServiceTest {
+public class CategoryControllerTest {
 
 	@Autowired
-	CategoryServiceImpl categoryService;
+	CategoryController categoryController;
 	
 	@Test
 	public void getCategoriesTest() {
 		String expectedResult =	"ok";
 
 		// Assumed we have add some data in category table
-		String actualResult = categoryService.getCategories().getBody().getStatus();	
+		String actualResult = categoryController.getCategories().getBody().getStatus();	
 		assertEquals(expectedResult, actualResult);
 	}
 
@@ -52,7 +52,7 @@ public class CategoryServiceTest {
 		
 		category.setName(String.valueOf(categoryName));
 		
-		String actualResult = categoryService.addCategory(category).getBody().getStatus();
+		String actualResult = categoryController.addCategory(category).getBody().getStatus();
 		assertEquals(expectedResult, actualResult);
 	}
 	

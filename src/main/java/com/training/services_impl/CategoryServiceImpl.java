@@ -2,17 +2,15 @@ package com.training.services_impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.training.entities.Category;
 import com.training.exceptions.DuplicateException;
-import com.training.exceptions.NewsExceptionHandler;
 import com.training.exceptions.NotFoundException;
 import com.training.models.CategoryDTO;
-import com.training.models.ResponseData;
 import com.training.repositories.CategoryRepo;
 import com.training.services.CategoryService;
 
@@ -22,85 +20,75 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	CategoryRepo categoryRepo;
 
-	@Autowired
-	ResponseDataServiceImpl responseService;
-
-	@Autowired
-	NewsExceptionHandler newsException;
-
 	@Override
-	public ResponseEntity<ResponseData> getCategories() {
+	public List<CategoryDTO> getCategories() {
 		List<CategoryDTO> categoriesDTO = new ArrayList<>();
-		for(Category c: categoryRepo.findAll()) {
+		List<Category> categories = categoryRepo.findAll().stream().filter(i -> i.getIsActive() == 'Y').map(c -> c)
+				.collect(Collectors.toList());
+
+		categories.stream().forEach(i -> {
 			CategoryDTO cDTO = new CategoryDTO();
-			cDTO.setName(c.getName());
+			cDTO.setName(i.getName());
 			categoriesDTO.add(cDTO);
-		}
-		return responseService.responseSuccess(categoriesDTO);
+		});
+		return categoriesDTO;
 	}
 
 	@Override
-	public ResponseEntity<ResponseData> getCategoryById(long id) {
-		try {
+	public CategoryDTO getCategoryById(long id) {
 			Category existingCategory = categoryRepo.findById(id).orElse(null);
-			if (existingCategory == null || existingCategory.getIsActive()=='N') {
-				throw new NotFoundException();
-			}
+			if (existingCategory == null || existingCategory.getIsActive() == 'N') 
+				return null;
 			
 			CategoryDTO categoryDTO = new CategoryDTO();
 			categoryDTO.setName(existingCategory.getName());
-			return responseService.responseSuccess(categoryDTO);
-		} catch (NotFoundException ne) {
-			return newsException.notFoundException();
+			return categoryDTO;
 		}
-	}
 
 	@Override
-	public ResponseEntity<ResponseData> addCategory(CategoryDTO categoryDTO) {
+	public boolean addCategory(CategoryDTO categoryDTO) {
 		try {
 			Category existingCategory = categoryRepo.findByName(categoryDTO.getName()).orElse(null);
-			if (existingCategory != null && existingCategory.getIsActive()=='Y') {
+			if (existingCategory != null && existingCategory.getIsActive() == 'Y') {
 				throw new DuplicateException();
 			}
-			
+
 			Category category = new Category();
 			category.setName(categoryDTO.getName());
 			categoryRepo.save(category);
-			return responseService.responseSuccess(categoryDTO);
+			return true;
 		} catch (DuplicateException ex) {
-			return newsException.duplicateException();
+			return false;
 		}
 	}
 
 	@Override
-	public ResponseEntity<ResponseData> updateCategory(long id, CategoryDTO categoryDTO) {
+	public boolean updateCategory(long id, CategoryDTO categoryDTO) {
 		try {
 			Category existingCategory = categoryRepo.findById(id).orElse(null);
-			if (existingCategory == null || existingCategory.getIsActive()=='N') {
+			if (existingCategory == null || existingCategory.getIsActive() == 'N') 
 				throw new NotFoundException();
-			}
+			
 			existingCategory.setName(categoryDTO.getName());
 			categoryRepo.save(existingCategory);
-			return responseService.responseSuccess(categoryDTO);
+			return true;
 		} catch (NotFoundException ne) {
-			return newsException.notFoundException();
+			return false;
 		}
 	}
 
 	@Override
-	public ResponseEntity<ResponseData> deleteCategory(long id) {
+	public boolean deleteCategory(long id) {
 		try {
 			Category existingCategory = categoryRepo.findById(id).orElse(null);
-			if (existingCategory == null || existingCategory.getIsActive()=='N') 
+			if (existingCategory == null || existingCategory.getIsActive() == 'N')
 				throw new NotFoundException();
 			
 			existingCategory.setIsActive('N');
 			categoryRepo.save(existingCategory);
-
-			return responseService.responseSuccess(null);
+			return true;
 		} catch (NotFoundException ne) {
-			return newsException.notFoundException();
+			return false;
 		}
 	}
-
 }

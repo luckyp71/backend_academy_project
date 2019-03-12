@@ -5,7 +5,9 @@ public class AuthFailedException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
 	//Default constructor
-	public AuthFailedException() {}
+	public AuthFailedException() {
+		super("authentication failed");
+	}
 
 	public AuthFailedException(String message) {
 		super(message);

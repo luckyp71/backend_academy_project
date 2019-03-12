@@ -5,7 +5,9 @@ public class NotFoundException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 	
 	//Default constructor
-	public NotFoundException() {}
+	public NotFoundException() {
+		super("data not found");
+	}
 
 	public NotFoundException(String message) {
 		super(message);

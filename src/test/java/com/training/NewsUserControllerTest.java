@@ -1,6 +1,5 @@
 package com.training;
 
-
 import org.junit.runner.RunWith;
 import org.junit.After;
 import org.junit.Before;
@@ -10,20 +9,19 @@ import static org.junit.Assert.assertEquals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
+import com.training.controllers.NewsUserController;
 import com.training.entities.NewsUser;
 import com.training.models.NewsUserDTO;
-import com.training.services_impl.NewsUserServiceImpl;
 
 import java.security.SecureRandom;
 import java.util.stream.IntStream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NewsUserServiceTest {
+public class NewsUserControllerTest {
 
 	@Autowired
-	NewsUserServiceImpl userService;
+	NewsUserController userController;
 
 	private NewsUser user = new NewsUser();
 
@@ -58,7 +56,7 @@ public class NewsUserServiceTest {
 		
 		user.setUsername(String.valueOf(username));
 		user.setPassword("userpassword");
-		actualResult = userService.register(user).getBody().getMeta().getCode();
+		actualResult = userController.registerUser(user).getBody().getMeta().getCode();
 
 		assertEquals(expectedResult, actualResult);
 	}
@@ -72,7 +70,7 @@ public class NewsUserServiceTest {
 
 		user.setUsername(this.user.getUsername());
 		user.setPassword(this.user.getPassword());
-		actualResult = userService.login(user).getBody().getMeta().getCode();
+		actualResult = userController.login(user).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 
@@ -88,7 +86,7 @@ public class NewsUserServiceTest {
 	@Test
 	public void getUserProfileTest() {
 		int expectedResult = 200;
-		int actualResult = userService.getUserProfile(1).getBody().getMeta().getCode();
+		int actualResult = userController.getUser("1", "").getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 

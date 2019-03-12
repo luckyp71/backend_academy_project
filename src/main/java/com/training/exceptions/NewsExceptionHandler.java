@@ -20,23 +20,20 @@ public class NewsExceptionHandler {
 	private HttpStatus badRequestStatus = HttpStatus.BAD_REQUEST;
 
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<ResponseData> notFoundException() {
-		NotFoundException notFound = new NotFoundException("data not found");
-		Meta meta = new Meta(this.notFoundStatus.value(), "error -> data not found", notFound.getMessage());
+	public ResponseEntity<ResponseData> notFoundException(NotFoundException ex) {
+		Meta meta = new Meta(this.notFoundStatus.value(), "error -> data not found", ex.getMessage());
 		return responseService.responseError(HttpStatus.NOT_FOUND, null, meta);
 	}
 	
 	@ExceptionHandler(DuplicateException.class)
-	public ResponseEntity<ResponseData> duplicateException() {
-		DuplicateException duplicate = new DuplicateException("data already exists");
-		Meta meta = new Meta(this.badRequestStatus.value(), "error -> data already exists", duplicate.getMessage());
+	public ResponseEntity<ResponseData> duplicateException(DuplicateException ex) {
+		Meta meta = new Meta(this.badRequestStatus.value(), "error -> data already exists", ex.getMessage());
 		return responseService.responseError(HttpStatus.BAD_REQUEST, null, meta);
 	}
 	
 	@ExceptionHandler(AuthFailedException.class)
-	public ResponseEntity<ResponseData> authFailedException() {
-		AuthFailedException authFailed = new AuthFailedException("authentication failed");
-		Meta meta = new Meta(this.badRequestStatus.value(), "error -> authentication failed", authFailed.getMessage());
+	public ResponseEntity<ResponseData> authFailedException(AuthFailedException ex) {
+		Meta meta = new Meta(this.badRequestStatus.value(), "error -> authentication failed", ex.getMessage());
 		return responseService.responseError(HttpStatus.BAD_REQUEST, null, meta);
 	}
 }

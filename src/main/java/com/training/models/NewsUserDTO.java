@@ -5,6 +5,15 @@ public class NewsUserDTO {
 	private String username;
 	private String password;
 
+	public NewsUserDTO() {
+		//Default constructor
+	}
+	
+	public NewsUserDTO(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
