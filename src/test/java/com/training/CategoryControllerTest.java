@@ -29,6 +29,15 @@ public class CategoryControllerTest {
 		String actualResult = categoryController.getCategories().getBody().getStatus();	
 		assertEquals(expectedResult, actualResult);
 	}
+	
+	@Test
+	public void getCategoryById() {
+		int expectedResult = 200;
+		int actualResult = 404;
+		
+		actualResult = categoryController.getCategoryById(1).getBody().getMeta().getCode();
+		assertEquals(expectedResult, actualResult);
+	}
 
 	@Test
 	public void addCategoryTest() {
