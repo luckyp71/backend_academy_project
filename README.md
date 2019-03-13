@@ -6,6 +6,7 @@ A Simple News Service
 2. Maven
 3. Eclipse
 4. SonarQube
+5. Heroku
 
 ## Steps to run the project:
 1. Cleaning, installing, and packaging the project by using maven command i.e. "mvn clean install package" in the root directory.
