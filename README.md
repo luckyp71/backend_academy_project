@@ -12,3 +12,7 @@ A Simple News Service
 2. Conducting unit test by using maven command i.e. "mvn test" in the root directory (optional).
 3. Conducting code quality analysis by using SonarQube (optional).
 4. Run the project by using "mvn spring-boot:run" command in the root directory.
+
+
+## Documentation:
+https://documenter.getpostman.com/view/5848776/S11RLFnP
