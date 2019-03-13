@@ -46,7 +46,7 @@ public class Category implements Serializable {
 	@OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<News> news;
 	
-	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")
+	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT 'Y'")
 	private char isActive;
 	
 	//Default constructor

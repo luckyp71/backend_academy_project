@@ -48,7 +48,7 @@ public class News implements Serializable {
 	@Column(name = "updated_at", columnDefinition = "timestamp NULL default NULL on update current_timestamp")
 	private Timestamp newsUpdatedAt;
 
-	@Column(name = "is_active", columnDefinition = "CHAR(1) NOT NULL DEFAULT('Y')")
+	@Column(name = "is_active", columnDefinition = "CHAR(1) NOT NULL DEFAULT 'Y'")
 	private char isActive;
 
 	@ManyToOne(fetch = FetchType.EAGER)

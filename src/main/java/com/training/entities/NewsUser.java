@@ -49,7 +49,7 @@ public class NewsUser implements Serializable {
 	@Column(name = "updated_at", columnDefinition = "timestamp NULL default NULL on update current_timestamp")
 	private Timestamp updatedAt;
 	
-	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")
+	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT 'Y'")
 	private char isActive;
 
 	@OneToMany(mappedBy = "newsUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
