@@ -3,15 +3,14 @@ package com.training.entities;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-import javax.persistence.Transient;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,13 +22,14 @@ public class Category implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@SequenceGenerator(name="categorySequence", 
-			allocationSize=1, 
-			initialValue =1, 
-			sequenceName="categorySequence1")
-	
+//	@SequenceGenerator(name="categorySequence", 
+//			allocationSize=1, 
+//			initialValue =1, 
+//			sequenceName="categorySequence1")
+
+//	@GeneratedValue(generator="categorySequence")
 	@Id
-	@GeneratedValue(generator="categorySequence")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="category_id")
 	private long categoryId;
 	

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
+import javax.persistence.GenerationType;
 
 import java.sql.Timestamp;
 import java.io.Serializable;
@@ -24,13 +24,14 @@ public class News implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@SequenceGenerator(name="newsSequence", 
-			allocationSize=1, 
-			initialValue =1, 
-			sequenceName="newsSequence1")
+//	@SequenceGenerator(name="newsSequence", 
+//			allocationSize=1, 
+//			initialValue =1, 
+//			sequenceName="newsSequence1")
+//	@GeneratedValue(generator="newsSequence")
 	
 	@Id
-	@GeneratedValue(generator="newsSequence")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "news_id")
 	private long id;
 

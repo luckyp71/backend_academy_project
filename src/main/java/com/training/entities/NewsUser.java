@@ -14,6 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -25,13 +26,14 @@ public class NewsUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@SequenceGenerator(name="userSequence", 
-			allocationSize=1, 
-			initialValue =1, 
-			sequenceName="userSequence1")
+//	@SequenceGenerator(name="userSequence", 
+//			allocationSize=1, 
+//			initialValue =1, 
+//			sequenceName="userSequence1")
+//	@GeneratedValue(generator="userSequence")
 	
 	@Id
-	@GeneratedValue(generator="userSequence")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "user_id")
 	private long id;
 
