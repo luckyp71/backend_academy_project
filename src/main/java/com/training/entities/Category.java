@@ -17,11 +17,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
 @Table(name="category")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -48,7 +45,6 @@ public class Category implements Serializable {
 	private Timestamp categoryUpdatedAt;
 	
 	@OneToMany(mappedBy="category", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"category"})
 	private List<News> news;
 	
 	@Column(name="is_active", columnDefinition="CHAR(1) NOT NULL DEFAULT('Y')")

@@ -6,8 +6,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,7 +20,6 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "news")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class News implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -56,12 +53,10 @@ public class News implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
-	@JsonIgnoreProperties("newsUser")
 	public NewsUser newsUser;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "category_id")
-	@JsonIgnoreProperties("newsUser")
 	private Category category;
 
 	public News() {

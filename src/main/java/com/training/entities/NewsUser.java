@@ -17,13 +17,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.io.Serializable;
 
 @Entity
 @Table(name = "news_user")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewsUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
