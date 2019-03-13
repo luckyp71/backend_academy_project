@@ -2,7 +2,7 @@ package com.training.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
-
+import javax.persistence.Transient;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
