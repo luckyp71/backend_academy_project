@@ -2,7 +2,7 @@ package com.training.entities;
 
 import java.sql.Timestamp;
 import java.util.List;
-import javax.persistence.Transient;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -14,7 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -26,14 +25,13 @@ public class NewsUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-//	@SequenceGenerator(name="userSequence", 
-//			allocationSize=1, 
-//			initialValue =1, 
-//			sequenceName="userSequence1")
-//	@GeneratedValue(generator="userSequence")
+	@SequenceGenerator(name="userSequence", 
+			allocationSize=1, 
+			initialValue =1, 
+			sequenceName="userSequence1")
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(generator="userSequence")
 	@Column(name = "user_id")
 	private long id;
 

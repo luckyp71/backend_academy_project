@@ -2,7 +2,7 @@ package com.training.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
 
 import java.sql.Timestamp;
 import java.io.Serializable;
@@ -24,14 +24,13 @@ public class News implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-//	@SequenceGenerator(name="newsSequence", 
-//			allocationSize=1, 
-//			initialValue =1, 
-//			sequenceName="newsSequence1")
-//	@GeneratedValue(generator="newsSequence")
+	@SequenceGenerator(name="newsSequence", 
+			allocationSize=1, 
+			initialValue =1, 
+			sequenceName="newsSequence1")
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(generator="newsSequence")
 	@Column(name = "news_id")
 	private long id;
 
