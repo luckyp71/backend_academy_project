@@ -92,12 +92,12 @@ public class NewsControllerTest {
 	
 	@Test
 	public void deleteNewsTest() {
-		int expectedResult = 200;
-		int actualResult = 500;
+		int expectedResult = 404;
+		int actualResult = 200;
 		
 		//Assume we have add at least one data into news table,
-		//and that news data id = 4 with is_active = 'Y'
-		actualResult = newsController.deleteNews(4).getBody().getMeta().getCode();
+		//and that news data id = 5 with is_active = 'Y'
+		actualResult = newsController.deleteNews(5).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 }

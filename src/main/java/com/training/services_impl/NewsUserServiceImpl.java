@@ -1,7 +1,9 @@
 package com.training.services_impl;
 
 
+import java.security.SecureRandom;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -16,7 +18,7 @@ public class NewsUserServiceImpl implements NewsUserService {
 
 	@Autowired
 	NewsUserRepo userRepo;
-
+	
 	@Override
 	public NewsUserDTO register(NewsUserDTO userDTO) {
 		NewsUser existingUser = userRepo.findByUsername(userDTO.getUsername()).orElse(null);
@@ -29,6 +31,7 @@ public class NewsUserServiceImpl implements NewsUserService {
 		NewsUser user = new NewsUser();
 		user.setUsername(userDTO.getUsername());
 		user.setPassword(hashedPassword);
+		user.setEmail(userDTO.getEmail());
 		userRepo.save(user);
 		return userDTO;
 	}
@@ -38,9 +41,11 @@ public class NewsUserServiceImpl implements NewsUserService {
 		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElse(null);
 		if (existingUser == null || existingUser.getIsActive() == 'N')
 			return 'n';
+		
 		boolean authenticatedStatus = BCrypt.checkpw(user.getPassword(), existingUser.getPassword());
 		if (!authenticatedStatus)
 			return 'a';
+		
 		return 'y';
 	}
 
@@ -64,6 +69,10 @@ public class NewsUserServiceImpl implements NewsUserService {
 			NewsUserDTO userDTO = new NewsUserDTO();
 			userDTO.setUsername(existingUser.getUsername());
 			userDTO.setPassword(maskingPassword);
+			userDTO.setEmail(existingUser.getEmail());
+			
+			System.out.println(userDTO.getUsername());
+			System.out.println(userDTO.getEmail());
 			return userDTO;
 		}
 		return null;
@@ -84,8 +93,57 @@ public class NewsUserServiceImpl implements NewsUserService {
 			NewsUserDTO userDTO = new NewsUserDTO();
 			userDTO.setUsername(newsUser.getUsername());
 			userDTO.setPassword(maskingPassword);
+			userDTO.setEmail(newsUser.getEmail());
 			return userDTO;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean forgotPassword(NewsUserDTO user) {
+		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElseGet(null);
+		if(existingUser == null)
+			return false;
+		
+		//Generate random password with 8 characters length		 
+		char[] chars = new char[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n',
+				'o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9'}; 
+		SecureRandom rand = new SecureRandom();
+		char[] newPassword = new char[chars.length];
+		
+		IntStream.range(0, 8).forEach(i -> {
+			int randChar = rand.nextInt(chars.length);	
+			newPassword[i]=chars[randChar];
+		});
+		
+		String password = String.valueOf(newPassword).trim();
+		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+		
+		//Sending email
+		user.setPassword(password);
+		Thread thread = new EmailServiceImpl(user);
+		thread.start();
+	
+		//Save new password
+		existingUser.setPassword(hashedPassword);
+		userRepo.save(existingUser);
+		return true;
+	}
+
+	@Override
+	public char changePassword(NewsUserDTO user) {
+		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElse(null);
+		if (existingUser == null || existingUser.getIsActive() == 'N')
+			return 'n';
+		
+		boolean authenticatedStatus = BCrypt.checkpw(user.getPassword(), existingUser.getPassword());
+		if (!authenticatedStatus)
+			return 'a';
+		
+		String password = user.getNewPassword().trim();
+		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+		existingUser.setPassword(hashedPassword);
+		userRepo.save(existingUser);
+		return 'y';
 	}
 }

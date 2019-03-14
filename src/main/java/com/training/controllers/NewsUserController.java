@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +69,34 @@ public class NewsUserController {
 	public ResponseEntity<ResponseData> login(@RequestBody NewsUserDTO userDTO) {
 		try {
 			char status = userService.login(userDTO);
+			if (status == 'n')
+				throw new NotFoundException();
+			else if (status == 'a')
+				throw new AuthFailedException();
+			return responseService.responseSuccess(null);
+		} catch (NotFoundException ne) {
+			return newsException.notFoundException(ne);
+		} catch (AuthFailedException ae) {
+			return newsException.authFailedException(ae);
+		}
+	}
+	
+	@PutMapping(value = "/forgot", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseData> forgotPassword(@RequestBody NewsUserDTO userDTO) {
+		try {
+			boolean status = userService.forgotPassword(userDTO);
+			if(!status)
+				throw new NotFoundException();
+			return responseService.responseSuccess(null);
+		} catch (NotFoundException ne) {
+			return newsException.notFoundException(ne);
+		} 
+	}
+	
+	@PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ResponseData> changePassword(@RequestBody NewsUserDTO userDTO) {
+		try {
+			char status = userService.changePassword(userDTO);
 			if (status == 'n')
 				throw new NotFoundException();
 			else if (status == 'a')

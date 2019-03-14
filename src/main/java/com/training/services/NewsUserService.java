@@ -8,6 +8,10 @@ public interface NewsUserService {
 	
 	public char login(NewsUserDTO user);
 	
+	public boolean forgotPassword(NewsUserDTO user);
+	
+	public char changePassword(NewsUserDTO user);
+	
 	public boolean logout();
 	
 	public NewsUserDTO getUserProfile(long id);

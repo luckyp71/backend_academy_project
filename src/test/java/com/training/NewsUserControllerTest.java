@@ -31,6 +31,7 @@ public class NewsUserControllerTest {
 		user.setId(1);
 		user.setUsername("lucky");
 		user.setPassword("pratama");
+		user.setEmail("email@email.com");
 	}
 
 	@Test
@@ -56,6 +57,7 @@ public class NewsUserControllerTest {
 		
 		user.setUsername(String.valueOf(username));
 		user.setPassword("userpassword");
+		user.setEmail("email@email.com");
 		actualResult = userController.registerUser(user).getBody().getMeta().getCode();
 
 		assertEquals(expectedResult, actualResult);
