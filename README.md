@@ -16,3 +16,6 @@ A Simple News Service
 
 ## Postman Collection:
 https://www.getpostman.com/collections/a00f2b5334931c52e5dc
+
+## Documentation of local machine could be accessed in:
+http://localhost:8070/news/swagger-ui.html

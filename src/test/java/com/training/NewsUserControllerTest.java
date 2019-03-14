@@ -88,7 +88,7 @@ public class NewsUserControllerTest {
 	@Test
 	public void getUserProfileTest() {
 		int expectedResult = 200;
-		int actualResult = userController.getUser("1", "").getBody().getMeta().getCode();
+		int actualResult = userController.getUser("0", "").getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 

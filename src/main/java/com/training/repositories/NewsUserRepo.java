@@ -9,4 +9,5 @@ import com.training.entities.NewsUser;
 @Repository
 public interface NewsUserRepo extends JpaRepository<NewsUser, Long> {
 	Optional<NewsUser> findByUsername(String username);
+	Optional<NewsUser> findByEmail(String email);
 }

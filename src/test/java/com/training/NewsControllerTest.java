@@ -97,7 +97,7 @@ public class NewsControllerTest {
 		
 		//Assume we have add at least one data into news table,
 		//and that news data id = 5 with is_active = 'Y'
-		actualResult = newsController.deleteNews(5).getBody().getMeta().getCode();
+		actualResult = newsController.deleteNews(0).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
 }

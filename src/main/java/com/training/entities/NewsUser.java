@@ -41,7 +41,7 @@ public class NewsUser implements Serializable {
 	@Column(name = "password", columnDefinition="VARCHAR(100) NOT NULL")
 	private String password;
 	
-	@Column(name="email", columnDefinition="VARCHAR(100) NOT NULL")
+	@Column(name="email", columnDefinition="VARCHAR(100) NOT NULL", unique=true)
 	private String email;
 
 	@CreationTimestamp

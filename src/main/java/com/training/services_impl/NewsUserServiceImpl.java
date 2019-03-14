@@ -24,6 +24,10 @@ public class NewsUserServiceImpl implements NewsUserService {
 		NewsUser existingUser = userRepo.findByUsername(userDTO.getUsername()).orElse(null);
 		if (existingUser != null && existingUser.getIsActive() == 'Y')
 			return null;
+		
+		NewsUser existingEmail = userRepo.findByEmail(userDTO.getEmail()).orElse(null);
+		if (existingEmail != null && existingEmail.getIsActive() == 'Y')
+			return null;
 
 		String password = userDTO.getPassword();
 		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
@@ -98,7 +102,7 @@ public class NewsUserServiceImpl implements NewsUserService {
 
 	@Override
 	public boolean forgotPassword(NewsUserDTO user) {
-		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElse(null);
+		NewsUser existingUser = userRepo.findByEmail(user.getEmail()).orElse(null);
 		if(existingUser == null || existingUser.getIsActive() == 'N')
 			return false;
 		
