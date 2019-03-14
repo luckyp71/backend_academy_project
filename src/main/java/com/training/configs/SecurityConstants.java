@@ -29,5 +29,5 @@ public class SecurityConstants {
 	
 	public static String getSignUpUrl() {
 		return SIGN_UP_URL;
-	}    
+	}  
 }

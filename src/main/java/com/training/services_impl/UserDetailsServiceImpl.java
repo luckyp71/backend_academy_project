@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.applicationUserRepository = applicationUserRepository;
     }
     @Override
-    public UserDetails loadUserByUsername(String username)  {
+    public UserDetails loadUserByUsername(String username){
         NewsUser applicationUser = applicationUserRepository.findByUsername(username).orElse(null);
         if (applicationUser == null) {
             throw new UsernameNotFoundException(username);
