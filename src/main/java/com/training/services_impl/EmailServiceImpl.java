@@ -2,7 +2,6 @@ package com.training.services_impl;
 
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -13,13 +12,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.sendgrid.Content;
-import com.sendgrid.Email;
-import com.sendgrid.Mail;
-import com.sendgrid.Method;
-import com.sendgrid.Request;
-import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
 import com.training.models.EmailConfig;
 import com.training.models.NewsUserDTO;
 import com.training.services.EmailService;
@@ -49,62 +41,6 @@ public class EmailServiceImpl extends Thread implements EmailService {
 
 	@Override
 	public void sendEmail() {
-//	    Email from = new Email("backendacademy@gmail.com");
-//	    String subject = "Sending with SendGrid is Fun";
-//	    Email to = new Email(this.email);
-//	    Content content = new Content("text/plain", "Dear "+this.username+",\n\n Here is your new password: "+this.password);
-//	    Mail mail = new Mail(from, subject, to, content);
-//
-//	    SendGrid sg = new SendGrid(System.getenv("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"));
-//	    Request request = new Request();
-//	    try {
-//	      request.setMethod(Method.POST);
-//	      request.setEndpoint("mail/send");
-//	      request.setBody(mail.build());
-//	      Response response = sg.api(request);
-//	      System.out.println(response.getStatusCode());
-//	      System.out.println(response.getBody());
-//	      System.out.println(response.getHeaders());
-//	    } catch (IOException ex) {
-//	      
-//	    }
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		
-//		
-//	    SendGrid sendgrid = new SendGrid("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");
-//	    Email from = new Email("backendacademy@gmail.com");
-//	    String subject = "Forgot Password";
-//	    Email to = new Email(this.email);
-//	    Content content = new Content("text/plain", "Dear "+this.username+",\n\n Here is your new password: "+this.password);
-//	    Mail mail = new Mail(from, subject, to, content);
-//
-//	    SendGrid sg = new SendGrid(System.getenv("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"));
-//	    Request request = new Request();
-//	    try {
-//	      request.setMethod(Method.POST);
-//	      request.setEndpoint("mail/send");
-//	      request.setBody(mail.build());
-//	      Response response = sg.api(request);
-//	      System.out.println(response.getStatusCode());
-//	      System.out.println(response.getBody());
-//	      System.out.println(response.getHeaders());
-//	    } catch (IOException ex) {
-//	      
-//	    }
-//	  }
-//		
-
-		
-		
-		
 		EmailConfig emailConfig = new EmailConfig();
 		Properties props = new Properties();
 		props.put("mail.smtp.host", emailConfig.getHost());
