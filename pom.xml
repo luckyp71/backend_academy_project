@@ -49,22 +49,22 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+
+		<!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
 		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.5.0-b01</version>
+			<groupId>com.sendgrid</groupId>
+			<artifactId>sendgrid-java</artifactId>
 		</dependency>
 		<dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-swagger2</artifactId>
-           <version>2.9.2</version>
-       </dependency>
-       <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-swagger-ui</artifactId>
-           <version>2.9.2</version>
-       </dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>

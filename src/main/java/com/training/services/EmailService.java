@@ -1,9 +1,9 @@
 package com.training.services;
 
-import javax.mail.MessagingException;
+//import javax.mail.MessagingException;
 
 public interface EmailService {
 	
-	public void sendEmail() throws MessagingException;
+	public void sendEmail();
 
 }
