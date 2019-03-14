@@ -64,22 +64,6 @@ public class NewsUserController {
 		}
 
 	}
-
-	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ResponseData> login(@RequestBody NewsUserDTO userDTO) {
-		try {
-			char status = userService.login(userDTO);
-			if (status == 'n')
-				throw new NotFoundException();
-			else if (status == 'a')
-				throw new AuthFailedException();
-			return responseService.responseSuccess(null);
-		} catch (NotFoundException ne) {
-			return newsException.notFoundException(ne);
-		} catch (AuthFailedException ae) {
-			return newsException.authFailedException(ae);
-		}
-	}
 	
 	@PutMapping(value = "/forgot", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseData> forgotPassword(@RequestBody NewsUserDTO userDTO) {

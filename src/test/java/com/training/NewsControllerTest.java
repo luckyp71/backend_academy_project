@@ -37,12 +37,10 @@ public class NewsControllerTest {
 	
 	@Test
 	public void getNewsByIDTest() {
-		String expectedResult = "ok";
-		String actualResult = "error";
+		String expectedResult = "not found";
+		String actualResult = "ok";
 		
-		//Assumed we have add at least one data into news table,
-		//so that we could retrieve news data with id 1.
-		actualResult = newsController.getNewsById(1).getBody().getStatus();
+		actualResult = newsController.getNewsById(0).getBody().getStatus();
 		assertEquals(expectedResult, actualResult);
 	}
 	
@@ -78,15 +76,15 @@ public class NewsControllerTest {
 	
 	@Test
 	public void updateNewstTest() {
-		String expectedResult = "ok";
-		String actualResult = "error";
+		String expectedResult = "not found";
+		String actualResult = "ok";
 		
 		NewsDTO newsDTO = new NewsDTO();
 		newsDTO.setTitle("Update Test For Positive Scenario");
 		newsDTO.setContent("Update Unit test is bla bla bla");
 		newsDTO.setCategoryId(1);
 		
-		actualResult = newsController.updateNews(1, newsDTO).getBody().getStatus();
+		actualResult = newsController.updateNews(0, newsDTO).getBody().getStatus();
 		assertEquals(expectedResult, actualResult);
 	}
 	

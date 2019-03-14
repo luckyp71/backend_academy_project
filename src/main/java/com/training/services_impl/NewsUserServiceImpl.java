@@ -44,19 +44,6 @@ public class NewsUserServiceImpl implements NewsUserService {
 	}
 
 	@Override
-	public char login(NewsUserDTO user) {
-		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElse(null);
-		if (existingUser == null || existingUser.getIsActive() == 'N')
-			return 'n';
-		
-		boolean authenticatedStatus = BCrypt.checkpw(user.getPassword(), existingUser.getPassword());
-		if (!authenticatedStatus)
-			return 'a';
-		
-		return 'y';
-	}
-
-	@Override
 	public boolean logout() {
 		return true;
 	}

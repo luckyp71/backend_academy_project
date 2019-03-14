@@ -6,8 +6,6 @@ public interface NewsUserService {
 
 	public NewsUserDTO register(NewsUserDTO user);
 	
-	public char login(NewsUserDTO user);
-	
 	public boolean forgotPassword(NewsUserDTO user);
 	
 	public char changePassword(NewsUserDTO user);

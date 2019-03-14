@@ -64,19 +64,6 @@ public class NewsUserControllerTest {
 	}
 
 	@Test
-	public void loginTest() {
-		int expectedResult = 200;
-		int actualResult = 0;
-
-		NewsUserDTO user = new NewsUserDTO();
-
-		user.setUsername(this.user.getUsername());
-		user.setPassword(this.user.getPassword());
-		actualResult = userController.login(user).getBody().getMeta().getCode();
-		assertEquals(expectedResult, actualResult);
-	}
-
-	@Test
 	public void logoutTest() {
 		int expectedResult = 200;
 		// Still harcoded for positive testing scenario purpose

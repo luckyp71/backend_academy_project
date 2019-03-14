@@ -32,8 +32,8 @@ public class CategoryControllerTest {
 	
 	@Test
 	public void getCategoryById() {
-		int expectedResult = 200;
-		int actualResult = 404;
+		int expectedResult = 404;
+		int actualResult = 200;
 		
 		actualResult = categoryController.getCategoryById(1).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
