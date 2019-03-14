@@ -70,9 +70,6 @@ public class NewsUserServiceImpl implements NewsUserService {
 			userDTO.setUsername(existingUser.getUsername());
 			userDTO.setPassword(maskingPassword);
 			userDTO.setEmail(existingUser.getEmail());
-			
-			System.out.println(userDTO.getUsername());
-			System.out.println(userDTO.getEmail());
 			return userDTO;
 		}
 		return null;
@@ -101,8 +98,8 @@ public class NewsUserServiceImpl implements NewsUserService {
 
 	@Override
 	public boolean forgotPassword(NewsUserDTO user) {
-		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElseGet(null);
-		if(existingUser == null)
+		NewsUser existingUser = userRepo.findByUsername(user.getUsername()).orElse(null);
+		if(existingUser == null || existingUser.getIsActive() == 'N')
 			return false;
 		
 		//Generate random password with 8 characters length		 

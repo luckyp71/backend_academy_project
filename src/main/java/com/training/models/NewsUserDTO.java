@@ -6,12 +6,14 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 public class NewsUserDTO {
 	
 	private String username;
+	
 	private String password;
-	private String email;
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String newPassword;
 
+	private String email;	
+	
 	public NewsUserDTO() {
 		//Default constructor
 	}
@@ -21,7 +23,7 @@ public class NewsUserDTO {
 		this.password = password;
 	}
 	
-	public NewsUserDTO(String username, String password, String email, String newPassword) {
+	public NewsUserDTO(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -43,19 +45,19 @@ public class NewsUserDTO {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getNewPassword() {
 		return newPassword;
 	}
 
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

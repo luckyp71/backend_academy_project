@@ -50,6 +50,7 @@ public class EmailServiceImpl extends Thread implements EmailService {
 		props.put("mail.smtp.port", emailConfig.getSmtpPort());
 
 		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication("backendacademy@gmail.com", "backendacademy2019");
 			}
@@ -62,7 +63,7 @@ public class EmailServiceImpl extends Thread implements EmailService {
 			message.setText("Dear "+this.username+",\n\n Here is your new password: "+this.password);
 			Transport.send(message);
 		} catch (MessagingException e) {
-			throw new RuntimeException(e);
+			e.getLocalizedMessage();
 		}
 	}
 }
