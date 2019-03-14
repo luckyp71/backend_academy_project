@@ -5,13 +5,13 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.Properties;
 
-//import javax.mail.Message;
-//import javax.mail.MessagingException;
-//import javax.mail.PasswordAuthentication;
-//import javax.mail.Session;
-//import javax.mail.Transport;
-//import javax.mail.internet.InternetAddress;
-//import javax.mail.internet.MimeMessage;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import com.sendgrid.Content;
 import com.sendgrid.Email;
@@ -77,57 +77,57 @@ public class EmailServiceImpl extends Thread implements EmailService {
 		
 		
 		
-		
-		
-	    SendGrid sendgrid = new SendGrid("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");
-	    Email from = new Email("backendacademy@gmail.com");
-	    String subject = "Forgot Password";
-	    Email to = new Email(this.email);
-	    Content content = new Content("text/plain", "Dear "+this.username+",\n\n Here is your new password: "+this.password);
-	    Mail mail = new Mail(from, subject, to, content);
-
-	    SendGrid sg = new SendGrid(System.getenv("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"));
-	    Request request = new Request();
-	    try {
-	      request.setMethod(Method.POST);
-	      request.setEndpoint("mail/send");
-	      request.setBody(mail.build());
-	      Response response = sg.api(request);
-	      System.out.println(response.getStatusCode());
-	      System.out.println(response.getBody());
-	      System.out.println(response.getHeaders());
-	    } catch (IOException ex) {
-	      
-	    }
-	  }
-		
-
-		
-		
 //		
-//		EmailConfig emailConfig = new EmailConfig();
-//		Properties props = new Properties();
-//		props.put("mail.smtp.host", emailConfig.getHost());
-//		props.put("mail.smtp.socketFactory.port", emailConfig.getPort());
-//		props.put("mail.smtp.socketFactory.class", emailConfig.getSsl());
-//		props.put("mail.smtp.auth", emailConfig.getAuth());
-//		props.put("mail.smtp.port", emailConfig.getSmtpPort());
+//		
+//	    SendGrid sendgrid = new SendGrid("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");
+//	    Email from = new Email("backendacademy@gmail.com");
+//	    String subject = "Forgot Password";
+//	    Email to = new Email(this.email);
+//	    Content content = new Content("text/plain", "Dear "+this.username+",\n\n Here is your new password: "+this.password);
+//	    Mail mail = new Mail(from, subject, to, content);
 //
-//		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-//			@Override
-//			protected PasswordAuthentication getPasswordAuthentication() {
-//				return new PasswordAuthentication("backendacademy@gmail.com", "backendacademy2019");
-//			}
-//		});
-//		try {
-//			Message message = new MimeMessage(session);
-//			message.setFrom(new InternetAddress("backendacademy@gmail.com"));
-//			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(this.email));
-//			message.setSubject("Forgot Password");
-//			message.setText("Dear "+this.username+",\n\n Here is your new password: "+this.password);
-//			Transport.send(message);
-//		} catch (MessagingException e) {
-//			e.getLocalizedMessage();
-//		}
-//	}
+//	    SendGrid sg = new SendGrid(System.getenv("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"));
+//	    Request request = new Request();
+//	    try {
+//	      request.setMethod(Method.POST);
+//	      request.setEndpoint("mail/send");
+//	      request.setBody(mail.build());
+//	      Response response = sg.api(request);
+//	      System.out.println(response.getStatusCode());
+//	      System.out.println(response.getBody());
+//	      System.out.println(response.getHeaders());
+//	    } catch (IOException ex) {
+//	      
+//	    }
+//	  }
+//		
+
+		
+		
+		
+		EmailConfig emailConfig = new EmailConfig();
+		Properties props = new Properties();
+		props.put("mail.smtp.host", emailConfig.getHost());
+		props.put("mail.smtp.socketFactory.port", emailConfig.getPort());
+		props.put("mail.smtp.socketFactory.class", emailConfig.getSsl());
+		props.put("mail.smtp.auth", emailConfig.getAuth());
+		props.put("mail.smtp.port", emailConfig.getSmtpPort());
+
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication("backendacademy@gmail.com", "backendacademy2019");
+			}
+		});
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("backendacademy@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(this.email));
+			message.setSubject("Forgot Password");
+			message.setText("Dear "+this.username+",\n\n Here is your new password: "+this.password);
+			Transport.send(message);
+		} catch (MessagingException e) {
+			e.getLocalizedMessage();
+		}
+	}
 }
