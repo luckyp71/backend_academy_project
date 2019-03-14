@@ -25,7 +25,7 @@ public class EmailServiceImpl extends Thread implements EmailService {
 	private String type;
 
 	public EmailServiceImpl() {
-
+		//Default constructor, leave it blank
 	}
 
 	public EmailServiceImpl(NewsUserDTO userDTO, String type) {
