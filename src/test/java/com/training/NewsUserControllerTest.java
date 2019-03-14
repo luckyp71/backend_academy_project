@@ -57,7 +57,7 @@ public class NewsUserControllerTest {
 		
 		user.setUsername(String.valueOf(username));
 		user.setPassword("userpassword");
-		user.setEmail("email@email.com");
+		user.setEmail(String.valueOf(username));
 		actualResult = userController.registerUser(user).getBody().getMeta().getCode();
 
 		assertEquals(expectedResult, actualResult);

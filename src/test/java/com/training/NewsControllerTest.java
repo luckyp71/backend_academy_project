@@ -95,8 +95,6 @@ public class NewsControllerTest {
 		int expectedResult = 404;
 		int actualResult = 200;
 		
-		//Assume we have add at least one data into news table,
-		//and that news data id = 5 with is_active = 'Y'
 		actualResult = newsController.deleteNews(0).getBody().getMeta().getCode();
 		assertEquals(expectedResult, actualResult);
 	}
