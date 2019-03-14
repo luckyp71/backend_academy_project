@@ -14,16 +14,18 @@ import static java.util.Collections.emptyList;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private NewsUserRepo applicationUserRepository;
+    private NewsUserRepo userRepo;
+    
     public UserDetailsServiceImpl(NewsUserRepo applicationUserRepository) {
-        this.applicationUserRepository = applicationUserRepository;
+        this.userRepo = applicationUserRepository;
     }
+    
     @Override
     public UserDetails loadUserByUsername(String username){
-        NewsUser applicationUser = applicationUserRepository.findByUsername(username).orElse(null);
-        if (applicationUser == null) {
+        NewsUser user = userRepo.findByUsername(username).orElse(null);
+        if (user == null) 
             throw new UsernameNotFoundException(username);
-        }
-        return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+        
+        return new User(user.getUsername(), user.getPassword(), emptyList());
     }
 }
