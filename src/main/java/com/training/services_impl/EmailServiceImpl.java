@@ -18,21 +18,22 @@ import com.training.services.EmailService;
 
 @Service
 public class EmailServiceImpl extends Thread implements EmailService {
-	
+
 	private String username;
 	private String email;
 	private String password;
-	
+	private String type;
+
 	public EmailServiceImpl() {
-		
+
 	}
-	
-	public EmailServiceImpl(NewsUserDTO userDTO) {
+
+	public EmailServiceImpl(NewsUserDTO userDTO, String type) {
 		this.username = userDTO.getUsername();
 		this.email = userDTO.getEmail();
 		this.password = userDTO.getPassword();
+		this.type = type;
 	}
-	
 
 	@Override
 	public void run() {
@@ -59,8 +60,14 @@ public class EmailServiceImpl extends Thread implements EmailService {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("backendacademy@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(this.email));
-			message.setSubject("Forgot Password");
-			message.setText("Dear "+this.username+",\n\n Here is your new password: "+this.password);
+			if (type.equalsIgnoreCase("register")) {
+				message.setSubject("User Registeration");
+				message.setText("Dear " + this.username + ",\n\n You're successfully registered");
+			}
+			else if (type.equalsIgnoreCase("forgot")) {
+				message.setSubject("Forgot Password");
+				message.setText("Dear " + this.username + ",\n\n Here is your new password: " + this.password);
+			}
 			Transport.send(message);
 		} catch (MessagingException e) {
 			e.getLocalizedMessage();

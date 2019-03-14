@@ -28,7 +28,10 @@ public class NewsUserServiceImpl implements NewsUserService {
 		NewsUser existingEmail = userRepo.findByEmail(userDTO.getEmail()).orElse(null);
 		if (existingEmail != null && existingEmail.getIsActive() == 'Y')
 			return null;
-
+		
+		Thread thread = new EmailServiceImpl(userDTO,"register");
+		thread.start();
+		
 		String password = userDTO.getPassword();
 		String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 		userDTO.setPassword(hashedPassword);
@@ -122,7 +125,7 @@ public class NewsUserServiceImpl implements NewsUserService {
 		
 		//Sending email
 		user.setPassword(password);
-		Thread thread = new EmailServiceImpl(user);
+		Thread thread = new EmailServiceImpl(user,"forgot");
 		thread.start();
 	
 		//Save new password
