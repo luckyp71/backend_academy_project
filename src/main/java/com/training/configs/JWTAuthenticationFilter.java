@@ -2,6 +2,8 @@ package com.training.configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.training.entities.NewsUser;
+import com.training.services_impl.ResponseDataServiceImpl;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,11 +46,15 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+    	ResponseDataServiceImpl responseService = new ResponseDataServiceImpl();
         String token = Jwts.builder()
                 .setSubject(((User) auth.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.getExpirationTime()))
                 .signWith(SignatureAlgorithm.HS512, SecurityConstants.getSecret())
                 .compact();
         res.addHeader(SecurityConstants.getHeaderString(), SecurityConstants.getTokenPrefix() + token);
+        res.setContentType("application/json");
+        String json = new ObjectMapper().writeValueAsString(responseService.responseSuccess(null).getBody());
+        res.getWriter().write(json);
     }
 }
