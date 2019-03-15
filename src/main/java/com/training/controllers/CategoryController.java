@@ -60,7 +60,7 @@ public class CategoryController {
 		}
 	}
 
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ResponseData> updateCategory(@PathVariable("id") long id,
 			@RequestBody CategoryDTO categoryDTO) {
 		try {
