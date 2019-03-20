@@ -3,6 +3,7 @@ package com.training.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,6 +21,7 @@ import com.training.models.ResponseData;
 import com.training.services_impl.NewsUserServiceImpl;
 import com.training.services_impl.ResponseDataServiceImpl;
 
+@CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
 @RequestMapping("/users")
 public class NewsUserController {
