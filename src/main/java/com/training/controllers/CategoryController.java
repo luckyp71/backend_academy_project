@@ -3,7 +3,6 @@ package com.training.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,6 @@ import com.training.models.ResponseData;
 import com.training.services_impl.CategoryServiceImpl;
 import com.training.services_impl.ResponseDataServiceImpl;
 
-@CrossOrigin(origins="*", allowedHeaders="*")
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
